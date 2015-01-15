@@ -1,0 +1,55 @@
+﻿@model Europa.Web.Ui.Adm.Models.MontadoraImagemViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Alterar Imagem</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("AlterarImagem", "Montadoras", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <figure>
+                            @if (string.IsNullOrEmpty(@Model.logo))
+                            {
+
+                                <img src="~/Content/images/SemImagem.PNG" style="width: 140px; height: 140px;" class="img-rounded" />
+                            }
+                            else
+                            {
+                                 Random random = new Random();
+                                 Int32 randomNumber = random.Next( 0, 4 );
+
+                                <img src="~/Content/images/Montadoras/@Model.logo?v=@randomNumber" style="width: 140px; height: 140px;" class="img-rounded" />
+                            }
+                            @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { style = "font-size:1px; color:white; visibility: hidden;" } })
+                        </figure>
+
+                    </div>
+                </div>
+                <br /><br />
+                <div class="row">
+                    <div class="col-md-6"><input id="upload" name="Foto" type="file"></div>
+                    <div class="col-md-6"></div>
+                </div>
+                <br />
+                <br />
+                <div class="row">
+                    <div class="col-md-6"><input value="Atualizar Imagem" type="submit" class="btn btn-primary"></div>
+                    <div class="col-md-6"></div>
+                </div>
+            </div>
+        }
+    </div>
+</body>
+</html>

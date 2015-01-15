@@ -1,0 +1,475 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EuropaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="IdCategoria" />
+          </Key>
+          <Property Name="IdCategoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Marca">
+          <Key>
+            <PropertyRef Name="IdMarca" />
+          </Key>
+          <Property Name="IdMarca" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Descricao" Type="varchar" MaxLength="1000" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="IdMontadora" Type="int" />
+          <Property Name="DataCad" Type="datetime" Nullable="false" />
+          <Property Name="DataUltimaAtualizacao" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'C:\WEBSITES\EUROPA\EUROPA.DAO\EUROPA.MDF.dbo.MarcaProduto' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="MarcaProduto">
+          <Key>
+            <PropertyRef Name="IdMarca" />
+            <PropertyRef Name="IdProduto" />
+          </Key>
+          <Property Name="IdMarca" Type="int" Nullable="false" />
+          <Property Name="IdProduto" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Modulo">
+          <Key>
+            <PropertyRef Name="IdModulo" />
+          </Key>
+          <Property Name="IdModulo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Icone" Type="varchar" MaxLength="16" />
+          <Property Name="Descricao" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Montadora">
+          <Key>
+            <PropertyRef Name="IdMontadora" />
+          </Key>
+          <Property Name="IdMontadora" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Descricao" Type="varchar" MaxLength="1000" />
+          <Property Name="Logo" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Produto">
+          <Key>
+            <PropertyRef Name="IdProduto" />
+          </Key>
+          <Property Name="IdProduto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="IdCategoria" Type="int" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="DataCad" Type="datetime" Nullable="false" />
+          <Property Name="DataUltimaAtualizacao" Type="datetime" Nullable="false" />
+          <Property Name="Descricao" Type="varchar" MaxLength="1000" />
+          <Property Name="Logo" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="CPF" Type="int" />
+          <Property Name="Email" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Foto" Type="varchar" MaxLength="250" />
+          <Property Name="QtdAcesso" Type="int" />
+          <Property Name="DataNasc" Type="date" />
+          <Property Name="UltimoAcesso" Type="int" />
+          <Property Name="FlagAdmin" Type="bit" />
+          <Property Name="Sexo" Type="char" MaxLength="1" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="Telefone" Type="varchar" MaxLength="16" />
+          <Property Name="Senha" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'C:\WEBSITES\EUROPA\EUROPA.DAO\EUROPA.MDF.dbo.UsuarioModulo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UsuarioModulo">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+            <PropertyRef Name="IdModulo" />
+          </Key>
+          <Property Name="IdUsuario" Type="int" Nullable="false" />
+          <Property Name="IdModulo" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Marca__IdMontado__1920BF5C">
+          <End Role="Montadora" Type="Self.Montadora" Multiplicity="0..1" />
+          <End Role="Marca" Type="Self.Marca" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Montadora">
+              <PropertyRef Name="IdMontadora" />
+            </Principal>
+            <Dependent Role="Marca">
+              <PropertyRef Name="IdMontadora" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MarcaProd__IdMar__1CF15040">
+          <End Role="Marca" Type="Self.Marca" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MarcaProduto" Type="Self.MarcaProduto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marca">
+              <PropertyRef Name="IdMarca" />
+            </Principal>
+            <Dependent Role="MarcaProduto">
+              <PropertyRef Name="IdMarca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MarcaProd__IdPro__1DE57479">
+          <End Role="Produto" Type="Self.Produto" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MarcaProduto" Type="Self.MarcaProduto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produto">
+              <PropertyRef Name="IdProduto" />
+            </Principal>
+            <Dependent Role="MarcaProduto">
+              <PropertyRef Name="IdProduto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Produto__IdCateg__4AB81AF0">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Produto" Type="Self.Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="IdCategoria" />
+            </Principal>
+            <Dependent Role="Produto">
+              <PropertyRef Name="IdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UsuarioMo__IdMod__145C0A3F">
+          <End Role="Modulo" Type="Self.Modulo" Multiplicity="1" />
+          <End Role="UsuarioModulo" Type="Self.UsuarioModulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modulo">
+              <PropertyRef Name="IdModulo" />
+            </Principal>
+            <Dependent Role="UsuarioModulo">
+              <PropertyRef Name="IdModulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UsuarioMo__IdUsu__1367E606">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="UsuarioModulo" Type="Self.UsuarioModulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="UsuarioModulo">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EuropaModelStoreContainer">
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Marca" EntityType="Self.Marca" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Modulo" EntityType="Self.Modulo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Montadora" EntityType="Self.Montadora" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Produto" EntityType="Self.Produto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MarcaProduto" EntityType="Self.MarcaProduto" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [MarcaProduto].[IdMarca] AS [IdMarca], 
+    [MarcaProduto].[IdProduto] AS [IdProduto]
+    FROM [dbo].[MarcaProduto] AS [MarcaProduto]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UsuarioModulo" EntityType="Self.UsuarioModulo" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UsuarioModulo].[IdUsuario] AS [IdUsuario], 
+    [UsuarioModulo].[IdModulo] AS [IdModulo]
+    FROM [dbo].[UsuarioModulo] AS [UsuarioModulo]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Marca__IdMontado__1920BF5C" Association="Self.FK__Marca__IdMontado__1920BF5C">
+            <End Role="Montadora" EntitySet="Montadora" />
+            <End Role="Marca" EntitySet="Marca" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MarcaProd__IdMar__1CF15040" Association="Self.FK__MarcaProd__IdMar__1CF15040">
+            <End Role="Marca" EntitySet="Marca" />
+            <End Role="MarcaProduto" EntitySet="MarcaProduto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MarcaProd__IdPro__1DE57479" Association="Self.FK__MarcaProd__IdPro__1DE57479">
+            <End Role="Produto" EntitySet="Produto" />
+            <End Role="MarcaProduto" EntitySet="MarcaProduto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Produto__IdCateg__4AB81AF0" Association="Self.FK__Produto__IdCateg__4AB81AF0">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Produto" EntitySet="Produto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UsuarioMo__IdMod__145C0A3F" Association="Self.FK__UsuarioMo__IdMod__145C0A3F">
+            <End Role="Modulo" EntitySet="Modulo" />
+            <End Role="UsuarioModulo" EntitySet="UsuarioModulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UsuarioMo__IdUsu__1367E606" Association="Self.FK__UsuarioMo__IdUsu__1367E606">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="UsuarioModulo" EntitySet="UsuarioModulo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EuropaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Marca">
+          <Key>
+            <PropertyRef Name="IdMarca" />
+          </Key>
+          <Property Name="IdMarca" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descricao" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="IdMontadora" Type="Int32" />
+          <NavigationProperty Name="Montadora" Relationship="Self.FK__Marca__IdMontado__1920BF5C" FromRole="Marca" ToRole="Montadora" />
+          <NavigationProperty Name="Produto" Relationship="Self.MarcaProduto" FromRole="Marca" ToRole="Produto" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="DataCad" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DataUltimaAtualizacao" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Modulo">
+          <Key>
+            <PropertyRef Name="IdModulo" />
+          </Key>
+          <Property Name="IdModulo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Icone" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Descricao" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.UsuarioModulo" FromRole="Modulo" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Montadora">
+          <Key>
+            <PropertyRef Name="IdMontadora" />
+          </Key>
+          <Property Name="IdMontadora" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descricao" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Logo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Marca" Relationship="Self.FK__Marca__IdMontado__1920BF5C" FromRole="Montadora" ToRole="Marca" />
+        </EntityType>
+        <EntityType Name="Produto">
+          <Key>
+            <PropertyRef Name="IdProduto" />
+          </Key>
+          <Property Name="IdProduto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descricao" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Marca" Relationship="Self.MarcaProduto" FromRole="Produto" ToRole="Marca" />
+          <Property Name="IdCategoria" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Categoria" Relationship="EuropaModel.FK__Produto__IdCateg__2A4B4B5E" FromRole="Produto" ToRole="Categoria" />
+          <Property Name="Logo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="DataCad" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DataUltimaAtualizacao" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CPF" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Foto" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="QtdAcesso" Type="Int32" />
+          <Property Name="DataNasc" Type="DateTime" Precision="0" />
+          <Property Name="UltimoAcesso" Type="Int32" />
+          <Property Name="FlagAdmin" Type="Boolean" />
+          <Property Name="Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="Telefone" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Senha" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Modulo" Relationship="Self.UsuarioModulo" FromRole="Usuario" ToRole="Modulo" />
+        </EntityType>
+        <Association Name="FK__Marca__IdMontado__1920BF5C">
+          <End Role="Montadora" Type="Self.Montadora" Multiplicity="0..1" />
+          <End Role="Marca" Type="Self.Marca" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Montadora">
+              <PropertyRef Name="IdMontadora" />
+            </Principal>
+            <Dependent Role="Marca">
+              <PropertyRef Name="IdMontadora" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MarcaProduto">
+          <End Role="Marca" Type="Self.Marca" Multiplicity="*" />
+          <End Role="Produto" Type="Self.Produto" Multiplicity="*" />
+        </Association>
+        <Association Name="UsuarioModulo">
+          <End Role="Modulo" Type="Self.Modulo" Multiplicity="*" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="EuropaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Marca" EntityType="Self.Marca" />
+          <EntitySet Name="Modulo" EntityType="Self.Modulo" />
+          <EntitySet Name="Montadora" EntityType="Self.Montadora" />
+          <EntitySet Name="Produto" EntityType="Self.Produto" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK__Marca__IdMontado__1920BF5C" Association="Self.FK__Marca__IdMontado__1920BF5C">
+            <End Role="Montadora" EntitySet="Montadora" />
+            <End Role="Marca" EntitySet="Marca" />
+          </AssociationSet>
+          <AssociationSet Name="MarcaProduto" Association="Self.MarcaProduto">
+            <End Role="Marca" EntitySet="Marca" />
+            <End Role="Produto" EntitySet="Produto" />
+          </AssociationSet>
+          <AssociationSet Name="UsuarioModulo" Association="Self.UsuarioModulo">
+            <End Role="Modulo" EntitySet="Modulo" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <EntitySet Name="Categoria" EntityType="EuropaModel.Categoria" />
+          <AssociationSet Name="FK__Produto__IdCateg__2A4B4B5E" Association="EuropaModel.FK__Produto__IdCateg__2A4B4B5E">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Produto" EntitySet="Produto" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="IdCategoria" />
+          </Key>
+          <Property Name="IdCategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Produto" Relationship="EuropaModel.FK__Produto__IdCateg__2A4B4B5E" FromRole="Categoria" ToRole="Produto" />
+        </EntityType>
+        <Association Name="FK__Produto__IdCateg__2A4B4B5E">
+          <End Type="EuropaModel.Categoria" Role="Categoria" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="EuropaModel.Produto" Role="Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="IdCategoria" />
+            </Principal>
+            <Dependent Role="Produto">
+              <PropertyRef Name="IdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EuropaModelStoreContainer" CdmEntityContainer="EuropaEntities">
+          <EntitySetMapping Name="Marca">
+            <EntityTypeMapping TypeName="EuropaModel.Marca">
+              <MappingFragment StoreEntitySet="Marca">
+                <ScalarProperty Name="DataUltimaAtualizacao" ColumnName="DataUltimaAtualizacao" />
+                <ScalarProperty Name="DataCad" ColumnName="DataCad" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="IdMarca" ColumnName="IdMarca" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="IdMontadora" ColumnName="IdMontadora" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modulo">
+            <EntityTypeMapping TypeName="EuropaModel.Modulo">
+              <MappingFragment StoreEntitySet="Modulo">
+                <ScalarProperty Name="IdModulo" ColumnName="IdModulo" />
+                <ScalarProperty Name="Icone" ColumnName="Icone" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Montadora">
+            <EntityTypeMapping TypeName="EuropaModel.Montadora">
+              <MappingFragment StoreEntitySet="Montadora">
+                <ScalarProperty Name="IdMontadora" ColumnName="IdMontadora" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Produto">
+            <EntityTypeMapping TypeName="EuropaModel.Produto">
+              <MappingFragment StoreEntitySet="Produto">
+                <ScalarProperty Name="DataUltimaAtualizacao" ColumnName="DataUltimaAtualizacao" />
+                <ScalarProperty Name="DataCad" ColumnName="DataCad" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+                <ScalarProperty Name="IdProduto" ColumnName="IdProduto" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="EuropaModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="CPF" ColumnName="CPF" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="QtdAcesso" ColumnName="QtdAcesso" />
+                <ScalarProperty Name="DataNasc" ColumnName="DataNasc" />
+                <ScalarProperty Name="UltimoAcesso" ColumnName="UltimoAcesso" />
+                <ScalarProperty Name="FlagAdmin" ColumnName="FlagAdmin" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Telefone" ColumnName="Telefone" />
+                <ScalarProperty Name="Senha" ColumnName="Senha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="MarcaProduto" TypeName="EuropaModel.MarcaProduto" StoreEntitySet="MarcaProduto">
+            <EndProperty Name="Marca">
+              <ScalarProperty Name="IdMarca" ColumnName="IdMarca" />
+            </EndProperty>
+            <EndProperty Name="Produto">
+              <ScalarProperty Name="IdProduto" ColumnName="IdProduto" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="UsuarioModulo" TypeName="EuropaModel.UsuarioModulo" StoreEntitySet="UsuarioModulo">
+            <EndProperty Name="Modulo">
+              <ScalarProperty Name="IdModulo" ColumnName="IdModulo" />
+            </EndProperty>
+            <EndProperty Name="Usuario">
+              <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Categoria">
+            <EntityTypeMapping TypeName="EuropaModel.Categoria">
+              <MappingFragment StoreEntitySet="Categoria">
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

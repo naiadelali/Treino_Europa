@@ -1,0 +1,17 @@
+﻿@using (Html.BeginForm("Index", "Categorias", FormMethod.Post, new { id = "nomeCategoria", enctype = "multipart/form-data", @class = "form-inline" }))
+{
+
+    <div class="form-group">
+        <label>Nome</label>
+        <input type="text" name="nomeCategoria" class="form-control" placeholder="Clique aqui para escrever." />
+    </div>
+
+    <input type="submit" value="Buscar" class="btn btn-default" />    @Html.ActionLink("Novo", "Create", null, new { @class = "btn btn-primary" })
+
+
+}
+
+
+
+
+

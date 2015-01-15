@@ -1,0 +1,27 @@
+﻿@model Europa.Dao.Usuario
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<body>
+    <div> 
+        @using (Html.BeginForm("Autentica", "Login"))
+        {
+            @Html.LabelFor(u => u.Email)
+            @Html.TextBoxFor(u => u.Email, new { @class = "form-control" })
+
+            @Html.LabelFor(u => u.Senha)
+            @Html.PasswordFor(u => u.Senha, new { @class = "form-control" })
+
+            <input type="submit" value="Logar" />
+        }
+    </div>
+</body>
+</html>

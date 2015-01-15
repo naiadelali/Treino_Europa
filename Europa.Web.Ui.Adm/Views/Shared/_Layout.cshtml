@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html class="ls-theme-green">
+<head>
+    <title>Europa</title>
+
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="Insira aqui a descrição da página.">
+
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/prettify.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap-dialog.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/stylesheets/locastyle.css" rel="stylesheet" type="text/css">
+
+    <script src="~/Scripts/jquery-2.1.3.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap-dialog.min.js"></script>
+    <script src="~/javascripts/locastyle.js" type="text/javascript"></script>
+    <link rel="icon" sizes="192x192" href="/locawebstyle/assets/images/ico-boilerplate.png">
+    <link rel="apple-touch-icon" href="/locawebstyle/assets/images/ico-boilerplate.png">
+</head>
+<body>
+    <div class="ls-topbar">
+
+        <!-- Notification bar -->
+        <div class="ls-notification-topbar">
+         
+
+            <!-- User details -->
+            <div data-ls-module="dropdown" class="ls-dropdown ls-user-account">
+                <a href="#" class="ls-ico-user">
+                   
+                    @Html.Action("Menu", "Usuarios")
+                </a>
+                <nav class="ls-dropdown-nav ls-user-menu">
+                    <ul>
+           
+                        <li><a href="@Url.Action("Index","Login")">Sair</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+       
+        <span class="ls-show-sidebar ls-ico-menu"></span>
+        <!-- Nome do produto/marca -->
+        <h1 class="ls-brand-name"><a  href="@Url.Action("Index","Home")">Europa</a></h1>
+    </div>
+
+    <main class="ls-main ">
+        <div class="container-fluid">
+           @RenderBody()
+        </div>
+    </main>
+
+    <aside class="ls-sidebar">
+       
+
+        <nav class="ls-menu">
+            <ul>
+                <li><a href="@Url.Action("Index","Home")" class="ls-ico-home">Página inicial</a></li>
+                <li><a href="@Url.Action("Index","Categorias")" class="ls-ico-table-alt">Categoria</a></li>
+                <li><a href="@Url.Action("Index","Montadoras")" class="ls-ico-table-alt">Montadora</a></li>
+                <li><a href="@Url.Action("Index","Marcas")" class="ls-ico-table-alt">Marca</a></li>
+                <li><a href="@Url.Action("Index","Produtos")" class="ls-ico-table-alt">Produto</a></li>
+                
+            </ul>
+        </nav>
+    </aside>
+
+   
+
+    <!-- We recommended use jQuery 1.10 or up -->
+   
+    
+</body>
+</html>

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Europa.Dao.Produto>
+
+@{
+    ViewBag.Title = "Produtos";
+}
+
+
+<p align="center"><span style="font-size:36px"> Produtos</span></p><br><br>
+
+<form>
+
+    <select name="Montadora">
+
+        <option>Chevrolet</option>
+        <option>Honda</option>
+        <option>Fiat</option>
+
+
+    </select>
+
+
+
+    <select name="Carro">
+
+        <option>Monza</option>
+        <option>Agile</option>
+        <option>Onix</option>
+
+
+    </select>
+
+
+
+    <select name="Peça">
+
+        <option>Aerofólio</option>
+        <option>Suspensão</option>
+        <option>Bateria</option>
+
+
+    </select>
+
+
+</form><br><br>
+@foreach (var item in Model) {
+<div id="produto">
+
+    <div id="descricao">
+        <h3>@Html.DisplayFor(modelItem => item.Nome)</h3>
+       @Html.DisplayFor(modelItem => item.Descricao)
+
+    </div>
+
+    <div id="foto">
+
+        <img src="img/bateria.jpg">
+
+    </div>
+
+
+</div>
+}
+

@@ -1,0 +1,130 @@
+﻿@model IEnumerable<Europa.Dao.Produto>
+@using GridMvc.Html
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container-fluid">
+    <h2>Lista de Produto</h2>
+
+    @Html.Partial("BuscaProduto", Model)
+
+</div>
+<br /><br />
+@Html.Grid(Model).Columns(columns =>
+{
+    /* Adding not mapped column, that renders body, using inline Razor html helper */
+
+
+    /* Adding "OrderID" column: */
+    columns.Add(m => m.Nome)
+            .Titled("Nome")
+            .SetWidth(100);
+    columns.Add()
+           .Encoded(false)
+           .Sanitized(false)
+           .SetWidth(30)
+           .RenderValueAs(m =>
+            @<b>
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" data-id="@m.IdProduto">
+
+                    Carregar imagem
+                </button>
+            </b>);
+    columns.Add(m => m.DataCad)
+            .Titled("Data de Cadastro")
+            .SetWidth(100);
+    columns.Add(m => m.DataUltimaAtualizacao)
+            .Titled("Data de Atualização")
+            .SetWidth(100);
+    columns.Add(m => m.Status)
+           .Titled("Item Ativo?")
+           .SetWidth(150);
+
+
+    columns.Add()
+            .Encoded(false)
+            .Sanitized(false)
+            .SetWidth(30)
+            .RenderValueAs(m =>
+                @<b>
+                    @Html.ActionLink("Editar", "Edit", new { id = m.IdProduto }) |
+                    @Html.ActionLink("Detalhes", "Details", new { id = m.IdProduto }) |
+                    @Html.ActionLink("Deletar", "Delete", new { id = m.IdProduto })
+                </b>);
+
+}).SetRowCssClasses(item => item.Status == false ? "label-warning" : string.Empty).WithPaging(15).Sortable().Filterable().WithMultipleFilters()
+
+<script>
+
+
+    $("button").click(function () {
+        var idMontadora = $(this).data("id");
+        var urlCompleta = window.location.href;
+        var n = urlCompleta.indexOf("Produtos");
+        var urlCortada = urlCompleta.substr(0, n);
+        var url = urlCortada + "Produtos/AlterarImagem/" + idMontadora;
+        BootstrapDialog.show({
+
+            title: 'Imagem',
+            buttons: [{
+                label: 'Fechar',
+                action: function (dialogRef) {
+                    dialogRef.close();
+                }
+            }],
+            message: $('<iframe src="' + url + '" width="500" height="400" frameborder="0" allowtransparency="true"></iframe>')
+        });
+
+    });
+
+    $(document).ready(function () {
+
+        //Dropdownlist Selectedchange event
+
+        $("#ddlMontadora").change(function () {
+
+            $("#ddlMarca").empty();
+
+            $.ajax({
+
+                type: 'POST',
+
+                url: '@Url.Action("PegaMarcas")', // we are calling json method
+
+                dataType: 'json',
+
+                data: { id: $("#ddlMontadora").val() },
+
+                // here we are get value of selected country and passing same value
+
+                success: function (states) {
+
+                    // states contains the JSON formatted list
+                    alert('deu certo');
+                    // of states passed from the controller
+                    $("#ddlMarca").append('<option value="">-- Todas --</option>');
+                    $.each(states, function (i, state) {
+
+                        $("#ddlMarca").append('<option value="' + state.Value + '">' +
+
+                             state.Text + '</option>');
+
+                    });
+
+                },
+
+                error: function (ex) {
+
+                    alert('Failed to retrieve states.' + ex);
+
+                }
+
+            });
+
+            return false;
+
+        })
+
+    });
+</script>

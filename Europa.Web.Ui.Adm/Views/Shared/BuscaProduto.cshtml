@@ -1,0 +1,25 @@
+﻿@using (Html.BeginForm("Index", "Produtos", FormMethod.Post, new { id = "nomeProduto", enctype = "multipart/form-data", @class = "form-inline" }))
+{
+    <div class="form-group">
+        <label>Nome</label>
+        <input type="text" name="nomeProduto" class="form-control" placeholder="Clique aqui para escrever." />
+    </div>
+    <div class="form-group">
+        <label>Categoria</label>
+        @Html.DropDownList("ddlCategoria", new SelectList(ViewBag.ListaCategoria, "IdCategoria", "Nome"), "--Todas--", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Montadora</label>
+        @Html.DropDownList("ddlMontadora", new SelectList(ViewBag.ListaMontadora, "IdMontadora", "Nome"), "--Todas--", new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        <label>Marca</label>
+       @Html.DropDownList("ddlMarca", new SelectList(string.Empty, "Value", "Text"), "--Todas--", new { @class = "form-control" })
+    </div>
+    
+
+    <input type="submit" value="Buscar" class="btn btn-default" />    @Html.ActionLink("Novo", "Create", null, new { @class = "btn btn-primary" })
+}
+
+

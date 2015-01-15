@@ -1,0 +1,13 @@
+﻿
+@using (Html.BeginForm("Index", "Montadoras", FormMethod.Post, new { id = "nomeMontadora", enctype = "multipart/form-data", @class = "form-inline" }))
+{
+    <div class="form-group">
+        <label>Nome</label>
+        <input type="text" name="nomeMontadora" class="form-control" placeholder="Clique aqui para escrever." />
+    </div>
+
+    <input type="submit" value="Buscar" class="btn btn-default" />    @Html.ActionLink("Novo", "Create", null,new {@class="btn btn-primary" })
+}
+
+
+

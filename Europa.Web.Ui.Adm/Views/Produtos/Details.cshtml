@@ -1,0 +1,78 @@
+﻿@model Europa.Dao.Produto
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+
+<h2>Detalhes do Produto</h2>
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Logo)
+        </dt>
+
+        <dd>
+            @if (string.IsNullOrEmpty(Model.Logo))
+            {
+                <img src="~/Content/images/SemImagem.PNG" style="width: 240px; height: 240px;" class="img-rounded" />
+            }
+            else
+            {
+                Random random = new Random();
+                Int32 randomNumber = random.Next(0, 4);
+                <img src="~/Content/images/Produtos/@Model.Logo?v=@randomNumber" style="width: 240px; height: 240px;" class="img-rounded" />
+            }
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+
+        <dt>
+            Item ativo?
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status) Sim
+        </dd>
+
+        <dt>
+            Categoria
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Categoria.Nome)
+        </dd>
+
+        <dt>
+            Marca
+        </dt>
+
+        <dd>
+
+            @foreach (Europa.Dao.Marca m in Model.Marca)
+            {
+                <div>@m.Nome</div>
+            }
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.IdProduto }) |
+    @Html.ActionLink("Voltar", "Index")
+</p>

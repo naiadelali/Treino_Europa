@@ -1,0 +1,50 @@
+﻿@model Europa.Dao.Marca
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+
+<h2>Detalhes da Marca</h2>
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+
+        <dt>
+            Item ativo?
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status) Sim
+        </dd>
+
+        <dt>
+           Montadora
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Montadora.Nome)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.IdMarca }) |
+    @Html.ActionLink("Voltar", "Index")
+</p>

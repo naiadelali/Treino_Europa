@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fb3dfcbbb2514d91a7d35d573642f71d" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="EuropaModel.Marca" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EuropaModel.Modulo" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="EuropaModel.Montadora" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EuropaModel.Produto" Width="1.5" PointX="5.25" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EuropaModel.Usuario" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <AssociationConnector Association="EuropaModel.FK__Marca__IdMontado__1920BF5C" ManuallyRouted="false" />
+        <AssociationConnector Association="EuropaModel.MarcaProduto" ManuallyRouted="false" />
+        <AssociationConnector Association="EuropaModel.UsuarioModulo" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="EuropaModel.Categoria" Width="1.5" PointX="8" PointY="2.625" />
+        <AssociationConnector Association="EuropaModel.FK__Produto__IdCateg__2A4B4B5E" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

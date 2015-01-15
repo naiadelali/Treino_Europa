@@ -1,0 +1,179 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	border: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	font-family: inherit;
+	padding: 0;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+	font-family: Arial, Helvetica, sans-serif;
+	color:#F00;
+	font-size:14px;
+	line-height: 150%;
+	
+	
+
+}
+
+
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+
+a:link, a:visited{
+	
+	text-decoration:none;
+	color:#FFF;
+	
+	
+	}
+	
+a:hover{
+	
+	text-decoration:underline;
+	color:#FFF;
+	
+	}
+	
+a:active{
+	
+	text-decoration:none;
+	
+	
+	}
+
+
+.faleconosco{
+	
+	color:#CCC;
+	font-size:15px;
+	line-height: 150%;	
+	text-align:center;
+	
+	}
+	
+	
+.copyright{
+	
+	color:#667;
+	font-size: 12px;
+	font-family:Verdana, Geneva, sans-serif;
+	text-align:center;
+	
+	}
+
+
+
+
+
+.historia{
+	
+	font-size: 18px;
+	
+	line-height: 180%;
+	
+	text-align:center;
+	
+	color:#667;
+	
+	
+	}
+	
+.texto{
+	
+	font-size: 20px;
+	
+	line-height: 160%;
+	
+	text-align:left;
+	
+	color:#667;
+	
+	
+	}
+	
+.texto2{
+	
+	font-size: 16px;
+	
+	line-height: 160%;
+	
+	text-align:left;
+	
+	color:#667;
+	
+	
+	}
+	
+.promo_format{
+	
+	font-size: 24px;
+	text-align:center;
+	
+	}
+	
+	
+.promo{
+	
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:16px;
+	
+	}
+	
+	
+.promo_tempo{
+	
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:16px;
+	color:#FFF;
+	}
+	
+.botform{
+	
+	width:70px;
+	height:25px;
+	font-size:14px;
+	
+	}
+	

@@ -1,0 +1,51 @@
+﻿@model Europa.Dao.Montadora
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+
+<h2>Detalhes da Montadora</h2>
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Logo)
+        </dt>
+
+        <dd>
+            @if (string.IsNullOrEmpty(Model.Logo))
+            {
+                <img src="~/Content/images/SemImagem.PNG" style="width: 140px; height: 140px;" class="img-rounded" />
+            }
+            else
+            {
+                Random random = new Random();
+                Int32 randomNumber = random.Next(0, 4);
+                <img src="~/Content/images/Montadoras/@Model.Logo?v=@randomNumber" style="width: 140px; height: 140px;" class="img-rounded" />
+            }
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.IdMontadora }, new { @class = "btn btn-default" }) |
+    @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-default" })
+</p>
